@@ -1,32 +1,3 @@
-/* module test(
-    input logic [15:0] SW,
-    input logic [3:0] KEY,
-    input CLOCK_50,
-    output logic [6:0] HEX0, HEX1, HEX2, HEX3,
-    output logic [17:0] LEDR
-);
-
-// Declare state variables
-logic [1:0] PS, NS;
-parameter S0 = 2'b00;
-
-// State machine
-always @(posedge CLOCK_50) begin
-    if (!KEY[0])
-    begin
-        PS <= S0;
-        LEDR[0] <= 1'b1;
-        //LEDR[1] <= 1'b0; // Turn off LEDR[1]
-    end
-    else
-    begin
-        PS <= NS;
-        LEDR[0] <= 1'b0; // Turn off LEDR[0]
-        LEDR[1] <= 1'b1;
-    end
-end
-
-endmodule */
 
 module test(
 		input logic [15:0] SW,
@@ -93,22 +64,11 @@ module test(
 									begin
 											if(!(KEY[3]))
 												begin
-													//NS <= ? S0 : S3;
 														LEDR[5:4] <= S0;
 														LEDR[17:16] <= S3;
 														LEDR[15:6] <= 10'b0000000000;
 												end
-										//NS <= !(KEY[3]) ? S0 : S3;
-										//LEDR[5:4] <= S0;
-										//LEDR[17:16] <= 2'b11;
-										//LEDR[15:6] <= 10'b0000000000;
-										//go <= 1'b1;
-										/*if (!(KEY[1]))
-											NS = S1;
-										else if (!(KEY[0]))
-											NS = S0;
-										else if (i==1)
-											NS = S3;*/
+										
 									end
 								//default: NS = 2'bxx;
 						endcase
@@ -151,10 +111,7 @@ module test(
 										a = b;
 										b = swap;
 									end
-									
-//								else if (b|16'b0)
-//									a = a - b;
-									
+							
 								LEDG[6] <= 1'b1;
 							end
 							
@@ -165,27 +122,6 @@ module test(
 							LEDG[2] <= 1'b0;
 							done <= 1'b0;
 					end
-				
-				
-				/* always @(CLOCK_50)
-					begin
-						if (NS == S1)
-							a = SW[15:0];
-						else if (NS == S2)
-							b = SW[15:0];
-						else if (NS == S3)
-							begin
-								if ( a<b )
-									begin
-										swap = a;
-										a = b;
-										b = swap;
-									end
-								else if (b|16'b0)
-									a = a - b;
-							end
-				//a', b' := a % b, b % (a % b);
-			 	end */
 				
 //			assign i = |b;
 //			assign ans = ((i == 0) & (PS == S3)) ? a : {16{1'bz}};
